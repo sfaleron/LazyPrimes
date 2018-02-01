@@ -10,12 +10,14 @@ import itertools
 
 from . _inner import primes
 
+from numbers import Integral
+
 class LazyPrimes(object):
-    def __init__(self, k=5, skipto=None):
+    def __init__(self, k=5, lowerBnd=None):
         self._it = primes(k)
 
-        if skipto:
-           self.skipto(skipto)
+        if not lowerBnd is None:
+           self.skipto(lowerBnd)
 
     __next__     = lambda self: next(self._it)
 
@@ -25,10 +27,10 @@ class LazyPrimes(object):
         """Iterate the next n primes"""
         return itertools.islice(self, n)
 
-    def takeuntil(self, n):
-        """Iterate through primes less than or equal to n"""
-        return itertools.takewhile(lambda x: x<=n, self)
+    def takeuntil(self, upperBnd):
+        """Iterate through primes less than or equal to upperBnd"""
+        return itertools.takewhile(lambda x: x<=upperBnd, self)
 
-    def skipto(self, n):
-        """Begin iterating at first prime greater than or equal to n"""
-        self._it = itertools.dropwhile(lambda x: x<n, self)
+    def skipto(self, lowerBnd):
+        """Begin iterating at first prime greater than or equal to lowerBnd"""
+        self._it = itertools.dropwhile(lambda x: x<lowerBnd, self)
