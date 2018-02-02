@@ -17,11 +17,18 @@ class Item(int):
 def primes(k):
     # Generate primes with the sieve and wheel factorization, which filters
     # multiples of the first k primes.
-    firstprimes = list(itertools.islice(sieve(itertools.count(2)), k + 1))
-    smallprimes = firstprimes[:-1]
-    nextprime   = firstprimes[-1]
+    if k == 0:
+        return baresieve()
 
-    return itertools.chain(smallprimes, sieve(spin(smallprimes, nextprime)))
+    else:
+        firstprimes = list(itertools.islice(baresieve(), k + 1))
+        smallprimes = firstprimes[:-1]
+        nextprime   = firstprimes[-1]
+
+        return itertools.chain(smallprimes, sieve(spin(smallprimes, nextprime)))
+
+def baresieve():
+    return sieve(itertools.count(2))
 
 def sieve(xs):
     # Generate the prime numbers, given an iterable of candidate numbers.
