@@ -14,4 +14,4 @@ Pure Python. There are `faster ways`_ to do this.
 .. _Haskell to Python2: http://logn.org/2009/07/lazy-primes-sieve-in-python.html
 .. _Original paper: http://www.cs.hmc.edu/~oneill/papers/Sieve-JFP.pdf
 
--- _faster ways: https://github.com/hickford/primesieve-python
+.. _faster ways: https://github.com/hickford/primesieve-python
