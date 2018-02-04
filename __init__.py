@@ -26,8 +26,7 @@ def realTest(n):
     return True
 
 class LazyPrimes(object):
-    def __init__(self, k=5, lowerBnd=None, upperBnd=None):
-
+    def __init__(self, k=5, lowerBnd=None, upperBnd=None, n=None):
         # itertools.islice() requires that k is valid, but
         # that's an implementation detail, not an interface
         if not isinstance(k, Integral) or k<0:
@@ -36,37 +35,24 @@ class LazyPrimes(object):
         self._it = primes(k)
 
         if not lowerBnd is None:
-           if not realTest(lowerBnd):
-               raise ValueError('lowerBnd must be a real number.')
-
            self.skipto(lowerBnd)
 
         if not upperBnd is None:
-           if not realTest(upperBnd):
-               raise ValueError('upperBnd must be a real number.')
-
            self.takeuntil(upperBnd)
+
+        if not n is None:
+           self.taken(n)
 
     __next__     = lambda self: next(self._it)
 
     __iter__     = lambda self: self._it
 
-    def taken(self, n):
-        """Iterate the next n primes"""
-        return itertools.islice(self, n)
-
-    def takeuntil(self, upperBnd):
-        """Iterate through primes less than or equal to upperBnd"""
-
-        if math.isinf(upperBnd):
-            if upperBnd>0:
-                return self
-
-        return itertools.takewhile(lambda x: x<=upperBnd, self)
-
     def skipto(self, lowerBnd):
         """Begin iterating at the next prime greater than or equal to lowerBnd.
            Accepts plus or minus infinity: Minus: no change; Plus: iterator becomes empty."""
+
+        if not realTest(lowerBnd):
+            raise ValueError('lowerBnd must be a real number.')
 
         if math.isinf(lowerBnd):
             if lowerBnd>0:
@@ -74,5 +60,26 @@ class LazyPrimes(object):
 
         else:
             self._it = itertools.dropwhile(lambda x: x<lowerBnd, self)
+
+    def takeuntil(self, upperBnd):
+        """Iterate through primes less than or equal to upperBnd"""
+
+        if not realTest(upperBnd):
+            raise ValueError('upperBnd must be a real number.')
+
+        if math.isinf(upperBnd):
+            if upperBnd>0:
+                return
+
+        self._it = itertools.takewhile(lambda x: x<=upperBnd, self)
+
+    def taken(self, n):
+        """Iterate the next n primes"""
+
+        if not (isinstance(k, Integral) or math.isinf(n)) or k<0:
+            raise ValueError('k must be a non-negative integer or plus infinity.')
+
+        self._it = itertools.islice(self, n)
+
 
 __all__ = ('LazyPrimes',)
