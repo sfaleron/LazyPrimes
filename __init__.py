@@ -26,6 +26,8 @@ def realTest(n):
     return True
 
 class LazyPrimes(object):
+    """All methods update internal state.
+       They return self, to support method chains."""
     def __init__(self, k=5, lowerBnd=None, upperBnd=None, n=None):
         # itertools.islice() requires that k is valid, but
         # that's an implementation detail, not an interface
@@ -61,6 +63,8 @@ class LazyPrimes(object):
         else:
             self._it = itertools.dropwhile(lambda x: x<lowerBnd, self)
 
+        return self
+
     def takeuntil(self, upperBnd):
         """Iterate through primes less than or equal to upperBnd"""
 
@@ -69,9 +73,11 @@ class LazyPrimes(object):
 
         if math.isinf(upperBnd):
             if upperBnd>0:
-                return
+                return self
 
         self._it = itertools.takewhile(lambda x: x<=upperBnd, self)
+
+        return self
 
     def taken(self, n):
         """Iterate the next n primes"""
@@ -80,6 +86,8 @@ class LazyPrimes(object):
             raise ValueError('k must be a non-negative integer or plus infinity.')
 
         self._it = itertools.islice(self, n)
+
+        return self
 
 
 __all__ = ('LazyPrimes',)
