@@ -82,8 +82,8 @@ class LazyPrimes(object):
     def taken(self, n):
         """Iterate the next n primes"""
 
-        if not (isinstance(k, Integral) or math.isinf(n)) or k<0:
-            raise ValueError('k must be a non-negative integer or plus infinity.')
+        if not isinstance(n, Integral) or n<0:
+            raise ValueError('n must be a non-negative integer.')
 
         self._it = itertools.islice(self, n)
 

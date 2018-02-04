@@ -1,7 +1,7 @@
 
 from lazyprimes.tests.testsyms import *
 
-def test_constructor_valid_k():
+def test_constructor_k_valid():
     g = LazyPrimes(k = 0)
     assert next(g) == 2
 
@@ -11,7 +11,7 @@ def test_constructor_valid_k():
     g = LazyPrimes(k = 2)
     assert next(g) == 2
 
-def test_constructor_invalid_k():
+def test_constructor_k_invalid():
     with pytest.raises(ValueError):
         g = LazyPrimes(k = -0.0)
 
@@ -33,7 +33,7 @@ def test_constructor_invalid_k():
     with pytest.raises(ValueError):
         g = LazyPrimes(k = -2.34)
 
-def test_constructor_valid_lowerBnd_valid():
+def test_constructor_lowerBnd_valid():
     g = LazyPrimes(lowerBnd=0)
     assert next(g) == 2
 
@@ -89,7 +89,7 @@ def test_constructor_valid_lowerBnd_valid():
         g = LazyPrimes(lowerBnd=float('inf'))
         next(g)
 
-def test_constructor_valid_lowerBnd_invalid():
+def test_constructor_lowerBnd_invalid():
     with pytest.raises(ValueError):
         g = LazyPrimes(lowerBnd=float('nan'))
 
@@ -107,3 +107,44 @@ def test_constructor_valid_lowerBnd_invalid():
 
     with pytest.raises(ValueError):
         g = LazyPrimes(lowerBnd=complex(1,1))
+
+def test_constructor_upperBnd_valid():
+    pass
+
+
+def test_constructor_upperBnd_invalid():
+    pass
+
+def test_constructor_n_valid():
+    with pytest.raises(StopIteration):
+        g = LazyPrimes().taken(0)
+        next(g)
+
+    g = LazyPrimes().taken(1)
+    assert list(g) == [2]
+
+    g = LazyPrimes().taken(2)
+    assert list(g) == [2,3]
+
+def test_constructor_n_invalid():
+    with pytest.raises(ValueError):
+        g = LazyPrimes().taken(-0.0)
+
+    with pytest.raises(ValueError):
+        g = LazyPrimes().taken(0.0)
+
+    with pytest.raises(ValueError):
+        g = LazyPrimes().taken(-0.2)
+
+    with pytest.raises(ValueError):
+        g = LazyPrimes().taken(-1)
+
+    with pytest.raises(ValueError):
+        g = LazyPrimes().taken(-2)
+
+    with pytest.raises(ValueError):
+        g = LazyPrimes().taken(1.23)
+
+    with pytest.raises(ValueError):
+        g = LazyPrimes().taken(-2.34)
+
