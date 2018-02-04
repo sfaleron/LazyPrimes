@@ -26,7 +26,7 @@ def realTest(n):
     return True
 
 class LazyPrimes(object):
-    def __init__(self, k=5, lowerBnd=None):
+    def __init__(self, k=5, lowerBnd=None, upperBnd=None):
 
         # itertools.islice() requires that k is valid, but
         # that's an implementation detail, not an interface
@@ -41,6 +41,12 @@ class LazyPrimes(object):
 
            self.skipto(lowerBnd)
 
+        if not upperBnd is None:
+           if not realTest(upperBnd):
+               raise ValueError('upperBnd must be a real number.')
+
+           self.takeuntil(upperBnd)
+
     __next__     = lambda self: next(self._it)
 
     __iter__     = lambda self: self._it
@@ -51,6 +57,11 @@ class LazyPrimes(object):
 
     def takeuntil(self, upperBnd):
         """Iterate through primes less than or equal to upperBnd"""
+
+        if math.isinf(upperBnd):
+            if upperBnd>0:
+                return self
+
         return itertools.takewhile(lambda x: x<=upperBnd, self)
 
     def skipto(self, lowerBnd):

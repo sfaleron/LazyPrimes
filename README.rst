@@ -6,7 +6,7 @@ Based on Melissa O'Neill's paper, by way of incremental translations:
 - `Haskell to Python2`_
 - `Original paper`_, with Haskell implementation
 
-This implementation presents a slightly simplified interface with support for skipping ahead and setting an upper bound. A test suite is included, and support for pickling is planned.
+This implementation presents a slightly simplified interface (with input validation) with support for skipping ahead and setting an upper bound. A test suite is included.
 
 Pure Python. There are `faster ways`_ to do this.
 
