@@ -27,7 +27,7 @@ def realTest(n):
 
 class LazyPrimes(object):
     """All methods update internal state.
-       They return self, to support method chains."""
+They return self, to support method chains."""
     def __init__(self, k=5, lowerBnd=None, upperBnd=None, n=None):
         # itertools.islice() requires that k is valid, but
         # that's an implementation detail, not an interface
@@ -37,13 +37,13 @@ class LazyPrimes(object):
         self._it = primes(k)
 
         if not lowerBnd is None:
-           self.skipto(lowerBnd)
+            self.skipto(lowerBnd)
 
         if not upperBnd is None:
-           self.takeuntil(upperBnd)
+            self.takeuntil(upperBnd)
 
         if not n is None:
-           self.taken(n)
+            self.taken(n)
 
     __next__     = lambda self: next(self._it)
 
@@ -51,7 +51,7 @@ class LazyPrimes(object):
 
     def skipto(self, lowerBnd):
         """Begin iterating at the next prime greater than or equal to lowerBnd.
-           Accepts plus or minus infinity: Minus: no change; Plus: iterator becomes empty."""
+Accepts plus or minus infinity: Minus: no change; Plus: iterator becomes empty."""
 
         if not realTest(lowerBnd):
             raise ValueError('lowerBnd must be a real number.')
