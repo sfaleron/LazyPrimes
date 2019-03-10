@@ -1,5 +1,9 @@
 
-from lazyprimes.tests.testsyms import *
+from __future__ import absolute_import
+
+import pytest
+
+from .. import LazyPrimes
 
 def test_constructor_k_valid():
     g = LazyPrimes(k = 0)

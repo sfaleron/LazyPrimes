@@ -5,14 +5,21 @@ import itertools
 
 from functools import reduce
 
+if hasattr(itertools, 'imap'):
+    imap = itertools.imap
+else:
+    imap = map
+
 class Item(int):
     def __new__(cls, value, it):
-        o = super().__new__(cls, value)
+        o = int.__new__(cls, value)
         o._it = it
 
         return o
 
     __next__ = lambda self: next(self._it)
+
+    next     = __next__
 
 def primes(k):
     # Generate primes with the sieve and wheel factorization, which filters
@@ -40,7 +47,7 @@ def sieve(xs):
             yield candidate
             xs, ys = itertools.tee(xs)
             timesx = (lambda x: lambda y: x*y)(candidate)
-            heapq.heappush(table, Item(candidate**2, map(timesx, ys)))
+            heapq.heappush(table, Item(candidate**2, imap(timesx, ys)))
         else:
             while table[0] <= candidate:
                 heapq.heapreplace(table, Item(next(table[0]), table[0]))

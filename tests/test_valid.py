@@ -1,14 +1,15 @@
 
-import pytest
-
 import os.path as osp
 
-from lazyprimes import LazyPrimes
+from .. import LazyPrimes
 
 def getKnownPrimes(memo=[]):
     if not memo:
         fn = osp.join(osp.dirname(__file__), 'knownprimes.dat')
         knownprimes = tuple(map(int, open(fn, 'r').readlines()))
-        memo.append(knownprimes)
+        memo += knownprimes
 
-    return tuple(memo[0])
+    return tuple(memo)
+
+def test_validate():
+    assert getKnownPrimes() == tuple(LazyPrimes(upperBnd=1000))
