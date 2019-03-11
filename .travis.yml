@@ -8,12 +8,20 @@
 # v3.0 - v3.3 will likely continue to be unsupported, but maybe those 
 # can be tested locally.
 
-dist: precise
+dist: xenial
 
-language: python
+# codecov.io support
+
+# Disable sudo to speed up the build
+# codecov.io suggestion, is travis really using sudo? with python?
+sudo: false
+
+# Install the codecov pip dependency
+install:
+  - pip install codecovlanguage: python
 
 python:
-  - "2.6"
+#  - "2.6"
   - "2.7"
   - "3.4"
   - "3.5"
@@ -22,3 +30,8 @@ python:
 
 script:
   - pytest
+  - coverage run tests.py
+
+# Push the results back to codecov
+after_success:
+  - codecov
