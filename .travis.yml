@@ -31,8 +31,7 @@ python:
   - "3.7"
 
 script:
-  - pytest
-  - coverage run tests.py
+  - coverage run pytest
 
 # Push the results back to codecov
 after_success:
