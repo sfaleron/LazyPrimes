@@ -1,7 +1,7 @@
 .. image:: https://travis-ci.org/sfaleron/LazyPrimes.svg?branch=master
     :target: https://travis-ci.org/sfaleron/LazyPrimesUnbounded prime iterator class for Python.
 
-Based on Melissa O'Neill's paper, by way of incremental translations:
+Based on Melissa O'Neill's paper, by way of incremental portings:
 
 - `Python2 to Python3`_
 - `Haskell to Python2`_
