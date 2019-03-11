@@ -1,4 +1,5 @@
-Unbounded prime iterator class for Python.
+.. image:: https://travis-ci.org/sfaleron/LazyPrimes.svg?branch=master
+    :target: https://travis-ci.org/sfaleron/LazyPrimesUnbounded prime iterator class for Python.
 
 Based on Melissa O'Neill's paper, by way of incremental translations:
 
