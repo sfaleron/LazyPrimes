@@ -1,3 +1,6 @@
+# for Python v3.7 support as of 2019-03-11
+dist: xenial
+
 language: python
 
 python:
