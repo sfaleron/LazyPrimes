@@ -15,7 +15,7 @@ dist: xenial
 
 # Disable sudo to speed up the build
 # codecov.io suggestion, is travis really using sudo? with python?
-#sudo: false
+sudo: false
 
 # Install codecov
 install:
